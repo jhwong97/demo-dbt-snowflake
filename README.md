@@ -12,7 +12,7 @@
 
 ### Step 2: Snowflake Configuration
 - Login to the newly created snowflake trial account.
-- From the side panel, navigate to **Projects** > **Worksheets** and then select the **Folders** tab. Next, create a new folder - `dbt-snowflake demo` by clicking the **" + "** button on the right hand side. This folder will be used to store all the related demo worksheets. Refer to the image below for better visualisation. ![image](/demo-dbt-snowflake/images/image1.png)
+- From the side panel, navigate to **Projects** > **Worksheets** and then select the **Folders** tab. Next, create a new folder - `dbt-snowflake demo` by clicking the **" + "** button on the right hand side. This folder will be used to store all the related demo worksheets. Refer to the image below for better visualisation. ![image](/images/image1.png)
 - Within the folder, create a new worksheet and include the following codes:
 	```sql
 	-- Create Snowflake user for dbt
@@ -129,5 +129,5 @@ To setup the connection of this dbt repository with your personal Snowflake data
 	```bash
 	dbt run --profiles-dir.
 	```
-- Navigate to your Snowflake and under the **Data**, check if there is a new table - `MY_FIRST_DBT_MODEL` and a new view - `MY_SECOND_DBT_MODEL` created inside your schema as shown in the image below. ![image](/demo-dbt-snowflake/images/image2.png)
+- Navigate to your Snowflake and under the **Data**, check if there is a new table - `MY_FIRST_DBT_MODEL` and a new view - `MY_SECOND_DBT_MODEL` created inside your schema as shown in the image below. ![image](/images/image2.png)
 - If everything run successfully, Congratz! You've set up your dbt to Snowflake connections.
