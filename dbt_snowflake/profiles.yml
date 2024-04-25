@@ -1,0 +1,13 @@
+dbt_snowflake:
+  outputs:
+    dev:
+      account: <organization_name>-<account_name>
+      database: dbt_dev
+      password: password
+      role: dbt_dev_role
+      schema: <schema_name>
+      threads: 1
+      type: snowflake
+      user: dbt_user
+      warehouse: dbt_dev_wh
+  target: dev
