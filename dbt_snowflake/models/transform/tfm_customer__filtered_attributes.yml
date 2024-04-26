@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: tfm_customer__filtered_attributes
+    meta:
+      owners: alwong
+    description: Contains customer information
+    columns:
+      - name: c_customer_id
+        description: The unique id of each customer
+        tests:
+          - unique
+
+      - name: c_birth_date
+        description: The customer's birth date
