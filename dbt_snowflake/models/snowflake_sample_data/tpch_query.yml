@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: tpch_query
+    meta:
+      owners: alwong
+    description: 
+      This query demonstrates basic SQL 
+      functionality using the included TPC-H sample
+      data.  The results are the amount of business
+      that was billed, shipped, and returned.
+    columns:
+      - name: l_returnflag
+        description: A flag indicating whether an item was returned or not
+        tests:
+          - not_null
+
+      - name: l_linestatus
+        description: Indicator of a particular line item in an order
+        tests:
+          - not_null
+
+      - name: sum_qty
+        description: The total quantity of items involved
+
+      - name: sum_base_price
+        description: The total base price of the items
+
+      - name: sum_disc_price
+        description: The total discounted price after any discounts are applied 
+
+      - name: sum_charge
+        description: The total charges associated with the order
+      
+      - name: avg_qty
+        description: The average quantity of items per order
+      
+      - name: avg_price
+        description: The average price of items per order
+      
+      - name: avg_disc
+        description: The average discount applied per order
+      
+      - name: count_order
+        description: The count of orders
