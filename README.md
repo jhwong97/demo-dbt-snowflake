@@ -125,9 +125,16 @@ To setup the connection of this dbt repository with your personal Snowflake data
 	```bash
 	dbt debug --profiles-dir .
 	```
+
+- Run the following command to download all the dbt packages or dependencies:
+	```bash
+	dbt deps
+	```
+
 - Run the sample dbt models - `my_first_dbt_model.sql` and `my_second_dbt_model.sql` by executing the following command:
 	```bash
-	dbt run --profiles-dir.
+	dbt run --profiles-dir .
 	```
+	
 - Navigate to your Snowflake and under the **Data**, check if there is a new table - `MY_FIRST_DBT_MODEL` and a new view - `MY_SECOND_DBT_MODEL` created inside your schema as shown in the image below. ![image](/images/image2.png)
 - If everything run successfully, Congratz! You've set up your dbt to Snowflake connections.
