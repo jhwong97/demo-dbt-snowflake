@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_customer_demographics__filtered_attributes
+    meta:
+      owners: alwong
+    description: Contains customer demographics information
+    columns:
+      - name: cd_demo_sk
+        description: The unique id of ccustomer demographics
+        tests:
+          - unique
+
+      - name: cd_gender
+        description: The customer gender
+
+      - name: cd_education_status
+        description: The customer education status
+
+      - name: cd_credit_rating
+        description: The customer credit rating

@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_customer_address__filtered_attributes
+    meta:
+      owners: alwong
+    description: Contains customer address information
+    columns:
+      - name: ca_address_id
+        description: The unique id of customer address
+        tests:
+          - unique
+
+      - name: ca_street_number
+        description: The street number
+
+      - name: ca_street_name
+        description: The street name
+
+      - name: ca_city
+        description: The city where customer is living in
