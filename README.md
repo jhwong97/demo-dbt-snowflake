@@ -1,10 +1,8 @@
 # DBT Core & Snowflake Hands On Practices
 ## 2.1 Objectives
-- Explain typical dbt directories structures
-- Introduction to basic important files - profiles.yml, dbt_projects.yml, sources.yml, schema.yml
-- How to add sources
-- How to install dependencies
-- Introduction of basic dbt commands like dbt run, dbt seed, dbt test, dbt docs generate, dbt docs serve, dbt show, dpt deps
+- To leverage sample data provided in Snowflake for building dbt models.
+- To provide basic understanding on the folder structures in dbt folders and their repsective usage.
+- Introduction to basic dbt commands.
 
 ## 2.2 Step-by-Step Guide
 ### Step 1: Sign Up for A Snowflake Trial Account
@@ -133,8 +131,58 @@ To setup the connection of this dbt repository with your personal Snowflake data
 
 - Run the sample dbt models - `my_first_dbt_model.sql` and `my_second_dbt_model.sql` by executing the following command:
 	```bash
-	dbt run --profiles-dir .
+	dbt run -m my_first_dbt_model my_second_dbt_model --profiles-dir .
 	```
 	
-- Navigate to your Snowflake and under the **Data**, check if there is a new table - `MY_FIRST_DBT_MODEL` and a new view - `MY_SECOND_DBT_MODEL` created inside your schema as shown in the image below. ![image](/images/image2.png)
+- Navigate to your Snowflake and under the **Data**, check if there is a new table - `MY_FIRST_DBT_MODEL` and a new view - `MY_SECOND_DBT_MODEL` created inside your schema as shown in the image below. 9: Try
 - If everything run successfully, Congratz! You've set up your dbt to Snowflake connections.
+
+### Step 6: Building dbt Models with Snowflake Sample Data
+- In this section, you will learn the fundamental of creating dbt source, model, schema and test.
+- Lets start with navigating to the models directory in the cloned repository by running this command:
+	```cmd
+	cd demo-dbt-snowflake/dbt_snowflake/models
+	```
+- Within the directory, you can see four (4) subfolders, namely:
+	- `example`: The built-in example models when initializing the dbt which are demonstrated in Step 5.
+	- `sowflake_sample_data`: A simple data query from snowflake sample data through dbt model.
+	- `staging`: In this initial layer, raw data from source systems is loaded into staging models. These models often perform light transformations, such as renaming columns for consistency, converting data types, or handling missing values.
+	- `transform`: This layer takes the cleaned data from the staging models and performs more complex transformations. These might include aggregating data, calculating business metrics, or joining data across different staging tables.
+- Diving into each of the folder, you can find the following files and their respective roles.
+
+| File Name|Description|
+| ----- | ---- |
+|`sources.yml` | It is a configuration for defining data sources in dbt, where it specifies the source of the raw data that will undergo transformations.|
+|`tpch_query.sql`<br>`stg_customer__filtered_attributes.sql`<br> `stg_customer_address__filtered_attributes.sql`<br> `stg_customer_demographics__filtered_attributes.sql`<br> `tfm_customer__filetered_attributes.sql` | It is referred as the dbt model, where you can write your SQL statement inside it to query and transform data.                                                          |
+| `tpch_query.yml`<br>`stg_customer__filtered_attributes.yml`<br>`stg_customer_address__filtered_attributes.yml`<br>`stg_customer_demographics__filtered_attributes.yml`<br>`tfm_customer__filetered_attributes.yml` | It is a `schema.yml` file where enriches it with metadata, descriptions, and test to ensure data integrity and to provide documentation for users and other developers. |
+- _Remarks:_ Referring to the file name, you would notice that there is two distinct prefix:
+    - stg_[source]__[entity].sql : This prefix stands for **staging**. Tables or models with this prefix are typically used as intermediate structures that hold raw data extracted directly from source systems.
+    - fct_[source]__[entity].sql : This prefix stands for **fact**. Fact tables contain the quantitative data (or metrics) that a business wants to analyze, often keyed by foreign keys to dimension tables.
+- Please take some time to review and understand the code in each file and understand how each file relates to each other.
+
+### Step 7: Running dbt Models
+- You can run the dbt model by executing this command `dbt run <model_name> --profiles-dir .`:
+	```bash
+	# Example
+	dbt run stg_customer__filtered_attributes --profiles-dir .
+	```
+
+### Step 8: Runnng dbt Tests
+- To run dbt test, you can run the following command `dbt test <model_name> --profiles-dir .`:
+	```bash
+	# Example
+	dbt run stg_customer__filtered_attributes --profiles-dir .
+	```
+- To implement or alter the type of schema tests, you can edit the dbt `schema.yml` file under the **tests** section as shown in the image below.
+![image](/images/image3.png)
+
+- The most common generic tests include:
+    - **Uniqueness**, which asserts that a column has no repeating values
+    - **Not null**, which asserts that there are no null values in a column
+    - **Referential integrity**, which tests that the column values have an existing relationship with a parent reference table
+    - **Referential integrity**, which tests data against a freshness SLA based on a pre-defined timestamp
+    - **Accepted values**, which checks if a field always contains values from a defined list
+- For more information, kindly refer to this [What is dbt Testing? Definition, Best Practices, and More](https://www.montecarlodata.com/blog-what-is-dbt-testing-definition-best-practices-and-more/#:~:text=There%20are%20two%20primary%20ways,often%20work%20together%20within%20dbt.).
+
+### Step 9: Summary
+- Now that you've completed all the steps and grasped some of the basics of DBT, it's time for you to build your own DBT models and put them to the test.
