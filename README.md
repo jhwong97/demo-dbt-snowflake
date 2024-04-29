@@ -131,13 +131,13 @@ To setup the connection of this dbt repository with your personal Snowflake data
 	```
 - There are a few configurations that you need to amend:
 	1. Get your Snowflake URL after login into your trail account. Refer to the image below, the Snowflake URL will be `https://app.snowflake.com/ulvqwvx/hok08760/worksheets`![image](/images/image4.png)
+
 	2. Replace the following parameters:
 		- `<organization_name>` to `ulvqwvx`
 		- `<account_name>` to `hok08760`
 		- `<schema_name>` : replace with any name that suit your preferences. Eg. `usr_alwong`
 
 - The updated `prodfiles.yml` should look the same as below:
-	```yml
 	```yml
 	dbt_snowflake:
 		outputs:
@@ -179,6 +179,7 @@ To setup the connection of this dbt repository with your personal Snowflake data
 
 ### Step 6: Building dbt Models with Snowflake Sample Data
 - In this section, you will learn the fundamental of creating dbt source, model, schema and test.
+
 - Lets start with navigating to the models directory in the cloned repository by running this command:
 	```cmd
 	cd demo-dbt-snowflake/dbt_snowflake/models
@@ -201,17 +202,21 @@ To setup the connection of this dbt repository with your personal Snowflake data
 - Please take some time to review and understand the code in each file and understand how each file relates to each other.
 
 ### Step 7: Running dbt Models
+- Before running the dbt models, please make sure your directory is pointing towards the `dbt-snowflake` where the `profiles.yml` is located at.
+
 - You can run the dbt model by executing this command `dbt run <model_name> --profiles-dir .`:
 	```bash
 	# Example
-	dbt run stg_customer__filtered_attributes --profiles-dir .
+	dbt run -m stg_customer__filtered_attributes --profiles-dir .
 	```
 
 ### Step 8: Runnng dbt Tests
+- Before running the dbt tests, please make sure your directory is pointing towards the `dbt-snowflake` where the `profiles.yml` is located at.
+
 - To run dbt test, you can run the following command `dbt test <model_name> --profiles-dir .`:
 	```bash
 	# Example
-	dbt run stg_customer__filtered_attributes --profiles-dir .
+	dbt test -m stg_customer__filtered_attributes --profiles-dir .
 	```
 - To implement or alter the type of schema tests, you can edit the dbt `schema.yml` file under the **tests** section as shown in the image below.
 ![image](/images/image3.png)
