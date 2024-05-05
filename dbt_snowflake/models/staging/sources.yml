@@ -8,3 +8,9 @@ sources:
       - name: customer
       - name: customer_address
       - name: customer_demographics
+
+  - name: order
+    database: snowflake_sample_data
+    schema: tpch_sf1
+    tables:
+      - name: orders
