@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_order_filtered_attributes
+    meta:
+      owners: alwong
+    description: Contains order information
+    columns:
+      - name: o_orderkey
+        description: The unique id of each order
+        tests:
+          - unique
+
+      - name: o_orderstatus
+        description: The order status
+
+      - name: o_totalprice
+        description: The total price of order
+
+      - name: o_orderdate
+        description: The date where the order is created
